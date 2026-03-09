@@ -1,6 +1,14 @@
-const app = require("./app");
+require('dotenv').config();
+const app = require('./app');
+const { connectDb } = require('./config/db');
+
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => {
-  console.log(`server started on port:`, port);
-});
+const bootstrap = async () => {
+  await connectDb();
+  app.listen(port, () => {
+    console.log(`server started on port: ${port}`);
+  });
+};
+
+bootstrap();

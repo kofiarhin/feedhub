@@ -1,19 +1,6 @@
-import { useEffect } from "react";
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './routes/AppRoutes';
+import './styles/global.styles.scss';
 
-const App = () => {
-  useEffect(() => {
-    const getHealth = async () => {
-      const url = import.meta.env.VITE_API_URL;
-      const res = await fetch(url);
-      console.log(res.ok);
-    };
-    getHealth();
-  }, []);
-  return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
-  );
-};
-
+const App = () => <BrowserRouter><AppRoutes /></BrowserRouter>;
 export default App;
