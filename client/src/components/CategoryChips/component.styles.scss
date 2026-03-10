@@ -1,0 +1,3 @@
+.category-chips { display: flex; gap: 0.5rem; overflow: auto; }
+.category-chips button { border: 1px solid #e5e7eb; background: #fff; padding: 0.4rem 0.8rem; border-radius: 999px; }
+.category-chips .active { background: #ff6b35; color: #fff; }
