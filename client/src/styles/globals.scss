@@ -1,15 +1,30 @@
-@import './reset';
-@import './variables';
-@import './mixins';
-@import './utilities';
+@use "./reset";
+@use "./variables" as *;
+@use "./mixins";
+@use "./utilities";
 
 body {
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif;
   background: $color-bg;
   color: $text-primary;
   font-size: 16px;
 }
 
-h1 { font-size: 32px; margin-bottom: 1rem; }
-h2 { font-size: 24px; margin-bottom: 0.75rem; }
-h3 { font-size: 20px; margin-bottom: 0.5rem; }
+h1 {
+  font-size: 32px;
+  margin-bottom: 1rem;
+}
+h2 {
+  font-size: 24px;
+  margin-bottom: 0.75rem;
+}
+h3 {
+  font-size: 20px;
+  margin-bottom: 0.5rem;
+}
