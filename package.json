@@ -8,7 +8,8 @@
     "server": "nodemon server/server.js",
     "client": "npm run dev --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "seed": "node server/seed/seed.js"
+    "seed": "node server/seed/seed.js",
+    "clear-db": "node server/seed/clearDb.js"
   },
   "keywords": [
     "feedhub",
