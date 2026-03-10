@@ -1,3 +1,4 @@
 .header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: #fff; border-bottom: 1px solid #e5e7eb; }
-.header-nav { display: flex; gap: 1rem; }
+.header-nav { display: flex; gap: 1rem; align-items: center; }
 .header-brand { color: #ff6b35; font-weight: 700; }
+.header-logout-button { border: 1px solid #d1d5db; background: #fff; color: #111827; border-radius: 0.375rem; padding: 0.35rem 0.75rem; cursor: pointer; }

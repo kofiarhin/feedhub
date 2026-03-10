@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { clearAuthToken, clearAuthUser, getAuthToken, getAuthUser, setAuthToken, setAuthUser } from '../../utils/storage';
 
 const initialState = {
-  token: getAuthToken(),
+  token: getAuthToken() || null,
   user: getAuthUser(),
 };
 
@@ -12,7 +12,7 @@ const authSlice = createSlice({
   reducers: {
     setCredentials: (state, action) => {
       const { token, user } = action.payload;
-      state.token = token || '';
+      state.token = token || null;
       state.user = user || null;
       setAuthToken(state.token);
       setAuthUser(state.user);
@@ -22,7 +22,7 @@ const authSlice = createSlice({
       setAuthUser(action.payload);
     },
     logout: (state) => {
-      state.token = '';
+      state.token = null;
       state.user = null;
       clearAuthToken();
       clearAuthUser();
