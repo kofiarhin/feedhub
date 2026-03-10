@@ -9,8 +9,8 @@ export const useUpdateMenuItem = () => {
       const response = await apiClient.put(`/menu/${menuItemId}`, payload);
       return response.data.data || response.data;
     },
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.stores.menu(data.storeId) });
+    onSuccess: (data, vars) => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.stores.menu(vars.storeId || data.storeId) });
     },
   });
 };
