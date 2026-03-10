@@ -22,6 +22,10 @@ const RestaurantPage = () => {
   const filtered = useMemo(() => (menu || []).filter((item) => item.name.toLowerCase().includes(search.toLowerCase())), [menu, search]);
 
   const addToCart = (item) => {
+    if (!item.available) {
+      return;
+    }
+
     const itemPayload = { id: item._id || item.id, name: item.name, price: item.price, quantity: 1 };
     if (cartStoreId && cartStoreId !== id) {
       dispatch(openCartConflict({ pendingItem: itemPayload, pendingStoreId: id }));
@@ -41,6 +45,8 @@ const RestaurantPage = () => {
   return (
     <section>
       <h1>{store?.name || 'Restaurant'}</h1>
+      <p>{store?.cuisineType || 'Mixed cuisine'}</p>
+      <p>{store?.deliveryEstimate || 'Delivery estimate unavailable'}</p>
       <SearchBar value={search} onChange={setSearch} placeholder="Search menu" />
       {isLoading && <LoadingSpinner />}
       <div className="app-stack">{filtered.map((item) => <MenuItemCard key={item._id || item.id} item={item} onAdd={() => addToCart(item)} />)}</div>

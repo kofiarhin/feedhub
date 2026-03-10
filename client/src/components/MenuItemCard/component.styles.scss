@@ -1,1 +1,27 @@
-.menu-item-card { display: flex; justify-content: space-between; padding: 1rem; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; }
+.menu-item-card {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.menu-item-card__badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.menu-item-card__badge--available {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.menu-item-card__badge--unavailable {
+  background: #fee2e2;
+  color: #991b1b;
+}

@@ -1,19 +1,26 @@
 import { formatCurrency } from '../../utils/currency';
-import StatusBadge from '../StatusBadge/StatusBadge';
 import './component.styles.scss';
 
-const MenuItemCard = ({ item, onAdd }) => (
-  <article className="menu-item-card">
-    <div>
-      <h4>{item.name}</h4>
-      <p>{item.description}</p>
-      <strong>{formatCurrency(item.price)}</strong>
-    </div>
-    <div>
-      <StatusBadge status={item.isAvailable ? 'Ready' : 'Cancelled'} />
-      <button type="button" onClick={onAdd} disabled={!item.isAvailable}>Add</button>
-    </div>
-  </article>
-);
+const MenuItemCard = ({ item, onAdd }) => {
+  const isAvailable = item.available === true;
+
+  return (
+    <article className="menu-item-card">
+      <div>
+        <h4>{item.name}</h4>
+        <p>{item.description}</p>
+        <strong>{formatCurrency(item.price)}</strong>
+      </div>
+      <div>
+        <span
+          className={`menu-item-card__badge ${isAvailable ? 'menu-item-card__badge--available' : 'menu-item-card__badge--unavailable'}`}
+        >
+          {isAvailable ? 'Available' : 'Unavailable'}
+        </span>
+        <button type="button" onClick={onAdd} disabled={!item.available}>Add</button>
+      </div>
+    </article>
+  );
+};
 
 export default MenuItemCard;
