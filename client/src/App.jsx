@@ -12,6 +12,8 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import OrderHistoryPage from './pages/OrderHistoryPage/OrderHistoryPage';
 import AdminLoginPage from './pages/AdminLoginPage/AdminLoginPage';
+import PartnerRegisterPage from './pages/PartnerRegisterPage/PartnerRegisterPage';
+import GuestOrderConfirmationPage from './pages/GuestOrderConfirmationPage/GuestOrderConfirmationPage';
 import AdminDashboardPage from './pages/AdminDashboardPage/AdminDashboardPage';
 import AdminOrdersPage from './pages/AdminOrdersPage/AdminOrdersPage';
 import AdminMenuPage from './pages/AdminMenuPage/AdminMenuPage';
@@ -31,8 +33,11 @@ const App = () => (
       <Route path="/restaurants/:id" element={<RestaurantPage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
+      <Route path="/checkout/guest-confirmation" element={<GuestOrderConfirmationPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/partner/login" element={<AdminLoginPage />} />
+      <Route path="/partner/register" element={<PartnerRegisterPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/help" element={<HelpPage />} />
@@ -42,7 +47,7 @@ const App = () => (
         <Route path="/orders" element={<OrderHistoryPage />} />
       </Route>
     </Route>
-    <Route path="/admin/login" element={<AdminLoginPage />} />
+    <Route path="/admin/login" element={<Navigate to="/partner/login" replace />} />
     <Route element={<AdminRoute />}>
       <Route element={<AdminLayout />}>
         <Route path="/admin" element={<AdminDashboardPage />} />

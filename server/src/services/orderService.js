@@ -35,6 +35,18 @@ const createOrder = async (payload, authUser) => {
     normalizedItems.push({ itemId: menuItem._id, name: menuItem.name, price: menuItem.price, quantity });
   }
 
+
+  if (authUser) {
+    const shouldUpdatePhone = !authUser.phone || authUser.phone !== phone;
+    const shouldUpdateAddress = !authUser.address || authUser.address !== address;
+    if (shouldUpdatePhone || shouldUpdateAddress || authUser.name !== customerName) {
+      authUser.phone = phone;
+      authUser.address = address;
+      authUser.name = customerName;
+      await authUser.save();
+    }
+  }
+
   return Order.create({
     storeId,
     userId: authUser ? authUser._id : undefined,

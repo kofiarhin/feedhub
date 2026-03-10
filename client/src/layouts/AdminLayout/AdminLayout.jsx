@@ -12,7 +12,7 @@ const AdminLayout = () => {
   const handleAdminLogout = () => {
     dispatch(logout());
     sessionStorage.clear();
-    navigate('/admin/login', { replace: true });
+    navigate('/partner/login', { replace: true });
   };
 
   return (

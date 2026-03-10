@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Store = require('../models/Store');
 const MenuItem = require('../models/MenuItem');
 const ApiError = require('../utils/ApiError');
@@ -11,7 +12,11 @@ const buildStoreFilters = async (query) => {
       { cuisineType: { $regex: query.q, $options: 'i' } }
     ];
   }
-  if (query.cuisine) filter.cuisineType = { $regex: `^${query.cuisine}$`, $options: 'i' };
+
+  const cuisineType = query.cuisineType || query.cuisine;
+  if (cuisineType) {
+    filter.cuisineType = { $regex: `^${cuisineType}$`, $options: 'i' };
+  }
 
   if (query.category) {
     const storeIds = await MenuItem.distinct('storeId', {
@@ -29,8 +34,9 @@ const listStores = async (query) => {
   return Store.find(filter).sort({ createdAt: -1 }).limit(limit);
 };
 
-const getStoreById = async (id) => {
-  const store = await Store.findById(id);
+const getStoreByIdOrSlug = async (idOrSlug) => {
+  const filter = mongoose.Types.ObjectId.isValid(idOrSlug) ? { _id: idOrSlug } : { slug: idOrSlug };
+  const store = await Store.findOne(filter);
   if (!store) throw new ApiError(404, 'Store not found', 'NOT_FOUND');
   return store;
 };
@@ -53,9 +59,9 @@ const updateStore = async (id, payload, adminId) => {
   return store;
 };
 
-const getStoreMenu = async (storeId) => {
-  await getStoreById(storeId);
-  return MenuItem.find({ storeId }).sort({ category: 1, createdAt: -1 });
+const getStoreMenu = async (storeIdOrSlug) => {
+  const store = await getStoreByIdOrSlug(storeIdOrSlug);
+  return MenuItem.find({ storeId: store._id }).sort({ category: 1, createdAt: -1 });
 };
 
-module.exports = { listStores, getStoreById, createStore, updateStore, getStoreMenu };
+module.exports = { listStores, getStoreByIdOrSlug, createStore, updateStore, getStoreMenu };

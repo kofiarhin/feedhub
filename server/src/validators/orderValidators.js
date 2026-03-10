@@ -9,7 +9,7 @@ const createOrderValidator = [
   body('items.*.quantity').isInt({ min: 1 }).withMessage('quantity must be >= 1'),
   body('customerName').trim().notEmpty().withMessage('customerName is required'),
   body('phone').trim().notEmpty().withMessage('phone is required'),
-  body('address').optional().isString().withMessage('address must be a string'),
+  body('address').trim().notEmpty().withMessage('address is required'),
   body('notes').optional().isString().withMessage('notes must be a string'),
   body('fulfillmentType').optional().isIn(ALL_FULFILLMENT_TYPES).withMessage('invalid fulfillment type')
 ];

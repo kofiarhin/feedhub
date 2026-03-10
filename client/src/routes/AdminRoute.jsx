@@ -5,7 +5,7 @@ import { selectIsAdmin, selectIsAuthenticated } from '../features/auth/authSelec
 const AdminRoute = () => {
   const authenticated = useSelector(selectIsAuthenticated);
   const isAdmin = useSelector(selectIsAdmin);
-  if (!authenticated) return <Navigate to="/admin/login" replace />;
+  if (!authenticated) return <Navigate to="/partner/login" replace />;
   return isAdmin ? <Outlet /> : <Navigate to="/" replace />;
 };
 

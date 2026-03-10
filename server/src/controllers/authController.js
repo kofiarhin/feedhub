@@ -1,28 +1,40 @@
-const asyncHandler = require("../utils/asyncHandler");
-const { successResponse } = require("../utils/response");
-const {
-  registerUser,
-  loginUser,
-  attachStoreIdIfAdmin,
-} = require("../services/authService");
+const asyncHandler = require('../utils/asyncHandler');
+const { successResponse } = require('../utils/response');
+const { registerCustomer, registerPartner, loginUser, getCurrentUser } = require('../services/authService');
+const ROLES = require('../constants/roles');
 
-const register = asyncHandler(async (req, res) => {
-  const data = await registerUser(req.body);
-  return successResponse(res, data, "User registered successfully", 201);
+const customerRegister = asyncHandler(async (req, res) => {
+  const data = await registerCustomer(req.body);
+  return successResponse(res, data, 'Customer registered successfully', 201);
 });
 
-const login = asyncHandler(async (req, res) => {
-  const data = await loginUser(req.body);
-  return successResponse(res, data, "Login successful");
+const customerLogin = asyncHandler(async (req, res) => {
+  const data = await loginUser(req.body, ROLES.CUSTOMER);
+  return successResponse(res, data, 'Customer login successful');
 });
 
-const logout = asyncHandler(async (_req, res) =>
-  successResponse(res, null, "Logout successful"),
-);
+const partnerRegister = asyncHandler(async (req, res) => {
+  const data = await registerPartner(req.body);
+  return successResponse(res, data, 'Partner registered successfully', 201);
+});
+
+const partnerLogin = asyncHandler(async (req, res) => {
+  const data = await loginUser(req.body, ROLES.ADMIN);
+  return successResponse(res, data, 'Partner login successful');
+});
+
+const logout = asyncHandler(async (_req, res) => successResponse(res, null, 'Logout successful'));
 
 const getMe = asyncHandler(async (req, res) => {
-  const user = await attachStoreIdIfAdmin(req.user);
-  return successResponse(res, user, "Current user fetched");
+  const user = await getCurrentUser(req.user);
+  return successResponse(res, user, 'Current user fetched');
 });
 
-module.exports = { register, login, logout, getMe };
+module.exports = {
+  customerRegister,
+  customerLogin,
+  partnerRegister,
+  partnerLogin,
+  logout,
+  getMe
+};

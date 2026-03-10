@@ -8,26 +8,41 @@ export const useAuthMutations = () => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
 
-  const register = useMutation({
+  const handleAuthSuccess = (data) => {
+    dispatch(setCredentials({ token: data.token, user: data.user }));
+    queryClient.invalidateQueries({ queryKey: queryKeys.auth.me });
+  };
+
+  const registerCustomer = useMutation({
     mutationFn: async (payload) => {
-      const response = await apiClient.post('/auth/register', payload);
+      const response = await apiClient.post('/auth/customer/register', payload);
       return response.data.data || response.data;
     },
-    onSuccess: (data) => {
-      dispatch(setCredentials({ token: data.token, user: data.user }));
-      queryClient.invalidateQueries({ queryKey: queryKeys.auth.me });
-    },
+    onSuccess: handleAuthSuccess
   });
 
-  const login = useMutation({
+  const loginCustomer = useMutation({
     mutationFn: async (payload) => {
-      const response = await apiClient.post('/auth/login', payload);
+      const response = await apiClient.post('/auth/customer/login', payload);
       return response.data.data || response.data;
     },
-    onSuccess: (data) => {
-      dispatch(setCredentials({ token: data.token, user: data.user }));
-      queryClient.invalidateQueries({ queryKey: queryKeys.auth.me });
+    onSuccess: handleAuthSuccess
+  });
+
+  const registerPartner = useMutation({
+    mutationFn: async (payload) => {
+      const response = await apiClient.post('/auth/partner/register', payload);
+      return response.data.data || response.data;
     },
+    onSuccess: handleAuthSuccess
+  });
+
+  const loginPartner = useMutation({
+    mutationFn: async (payload) => {
+      const response = await apiClient.post('/auth/partner/login', payload);
+      return response.data.data || response.data;
+    },
+    onSuccess: handleAuthSuccess
   });
 
   const logout = useMutation({
@@ -35,8 +50,8 @@ export const useAuthMutations = () => {
     onSettled: () => {
       dispatch(logoutAction());
       queryClient.clear();
-    },
+    }
   });
 
-  return { register, login, logout };
+  return { registerCustomer, loginCustomer, registerPartner, loginPartner, logout };
 };

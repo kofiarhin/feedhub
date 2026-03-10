@@ -1,11 +1,19 @@
 const MENU_TAGS = [
-  'spicy',
+  'pizza',
+  'burger',
   'vegan',
+  'dessert',
+  'drink',
+  'italian',
+  'chinese',
+  'mexican',
+  'indian',
   'vegetarian',
-  'gluten_free',
+  'gluten-free',
   'bestseller',
   'new',
-  'chef_special'
+  'spicy',
+  'chef-special'
 ];
 
 module.exports = MENU_TAGS;

@@ -2,9 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 import "./component.styles.scss";
 
 const TAG_GROUPS = {
-  Cuisine: ["pizza", "burger", "italian", "mexican", "indian", "chinese"],
-  Dietary: ["vegan", "vegetarian", "gluten-free", "halal"],
-  "Food types": ["dessert", "drink", "starter", "main"],
+  Discovery: ["pizza", "burger", "italian", "mexican", "indian", "chinese"],
+  Dietary: ["vegan", "vegetarian", "gluten-free"],
+  "Food type": ["dessert", "drink"],
+  Promo: ["bestseller", "new", "spicy", "chef-special"],
 };
 
 const CATEGORY_OPTIONS = ["Starters", "Main Dishes", "Drinks", "Desserts"];
@@ -17,7 +18,7 @@ const createDefaultForm = () => ({
   image:
     "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop",
   category: "Main Dishes",
-  tags: ["burger", "dessert"],
+  tags: ["burger"],
   available: true,
 });
 
@@ -48,7 +49,7 @@ const MenuItemForm = ({
       tags:
         Array.isArray(initialValues.tags) && initialValues.tags.length
           ? initialValues.tags
-          : ["burger", "dessert"],
+          : ["burger"],
       available: initialValues.available !== false,
     };
   }, [initialValues]);
@@ -79,9 +80,7 @@ const MenuItemForm = ({
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    console.log("FORM SUBMIT FIRED", form);
-
-    onSubmit({
+        onSubmit({
       ...form,
       price: Number(form.price),
     });

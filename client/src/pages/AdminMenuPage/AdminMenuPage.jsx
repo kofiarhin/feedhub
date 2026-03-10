@@ -28,12 +28,7 @@ const AdminMenuPage = () => {
   const isSaving = createItem.isPending || updateItem.isPending;
 
   const handleSubmit = (payload) => {
-    console.log("AUTH USER", user);
-    console.log("STORE ID", storeId);
-    console.log("FORM PAYLOAD", payload);
-
     if (!storeId) {
-      console.error("Missing storeId on admin user. Log out and log back in.");
       return;
     }
 
@@ -47,10 +42,7 @@ const AdminMenuPage = () => {
         {
           onSuccess: () => {
             setEditingId(null);
-          },
-          onError: (error) => {
-            console.error("UPDATE ITEM FAILED", error);
-          },
+          }
         },
       );
       return;
@@ -60,12 +52,8 @@ const AdminMenuPage = () => {
       { ...payload, storeId },
       {
         onSuccess: () => {
-          console.log("CREATE ITEM SUCCESS");
           setEditingId(null);
-        },
-        onError: (error) => {
-          console.error("CREATE ITEM FAILED", error);
-        },
+        }
       },
     );
   };

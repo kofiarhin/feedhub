@@ -8,7 +8,7 @@ const listStores = asyncHandler(async (req, res) => {
 });
 
 const getStore = asyncHandler(async (req, res) => {
-  const store = await storeService.getStoreById(req.params.id);
+  const store = await storeService.getStoreByIdOrSlug(req.params.id);
   return successResponse(res, store, 'Store fetched');
 });
 
