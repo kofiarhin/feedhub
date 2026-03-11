@@ -1,6 +1,6 @@
 .app-container { max-width: 1120px; margin: 0 auto; padding: 1rem; }
 .app-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
 .app-stack { display: grid; gap: 1rem; }
-.card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem; }
-.button-primary { display: inline-flex; background: #ff6b35; color: #fff; padding: 0.6rem 1rem; border-radius: 10px; }
-.alert-card { background: #fff7ed; border: 1px solid #fdba74; padding: 1rem; border-radius: 10px; }
+.card { background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1rem; }
+.button-primary { display: inline-flex; background: var(--brand-accent); color: #1f1309; padding: 0.6rem 1rem; border-radius: 10px; }
+.alert-card { background: rgba(251, 146, 60, 0.12); border: 1px solid var(--brand-accent); padding: 1rem; border-radius: 10px; }

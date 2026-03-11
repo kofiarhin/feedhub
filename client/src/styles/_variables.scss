@@ -1,8 +1,15 @@
-$color-primary: #ff6b35;
-$color-secondary: #1f2933;
-$color-accent: #22c55e;
-$color-bg: #f9fafb;
-$color-card: #ffffff;
-$color-border: #e5e7eb;
-$text-primary: #111827;
-$text-secondary: #6b7280;
+:root {
+  --app-bg: #0b0f14;
+  --surface-elevated: #111923;
+  --surface-card: #161f2b;
+  --surface-muted: #1b2532;
+  --border-subtle: #283241;
+  --border-strong: #374457;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --brand-accent: #ff7a2f;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --focus-ring: #fb923c;
+}

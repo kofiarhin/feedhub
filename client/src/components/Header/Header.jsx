@@ -16,10 +16,9 @@ const Header = () => {
 
   const isAdmin = user?.role === 'admin';
 
-  const navItems = useMemo(() => {
+  const desktopLinks = useMemo(() => {
     if (!token) {
       return [
-        { to: '/', label: 'Home' },
         { to: '/restaurants', label: 'Restaurants' },
         { to: '/cart', label: `Cart (${cartCount})` }
       ];
@@ -27,8 +26,6 @@ const Header = () => {
 
     if (isAdmin) {
       return [
-        { to: '/', label: 'Home' },
-        { to: '/restaurants', label: 'Restaurants' },
         { to: '/admin', label: 'Dashboard' },
         { to: '/admin/orders', label: 'Orders' },
         { to: '/admin/menu', label: 'Menu' },
@@ -37,44 +34,47 @@ const Header = () => {
     }
 
     return [
-      { to: '/', label: 'Home' },
       { to: '/restaurants', label: 'Restaurants' },
       { to: '/cart', label: `Cart (${cartCount})` },
       { to: '/orders', label: 'My Orders' }
     ];
   }, [cartCount, isAdmin, token]);
 
+  const guestActions = [
+    { to: '/auth?mode=login', label: 'Sign In', className: 'header-secondary-action' },
+    { to: '/auth?mode=register', label: 'Get Started', className: 'header-primary-action' },
+    { to: '/partner', label: 'For Restaurants', className: 'header-partner-entry' }
+  ];
+
   const handleLogout = () => {
-    const redirectPath = isAdmin ? '/partner/login' : '/login';
     dispatch(logout());
-    sessionStorage.clear();
     setMobileOpen(false);
-    navigate(redirectPath, { replace: true });
+    navigate(isAdmin ? '/partner/auth' : '/auth?mode=login', { replace: true });
   };
+
+  const mobileLinks = !token
+    ? [
+      { to: '/restaurants', label: 'Restaurants' },
+      { to: '/cart', label: `Cart (${cartCount})` },
+      ...guestActions
+    ]
+    : [
+      ...desktopLinks,
+      { action: handleLogout, label: 'Logout' }
+    ];
 
   return (
     <header className="header-container">
       <div className="header-inner app-container">
         <Link to="/" className="header-brand">FeedHub</Link>
         <nav className="header-nav-desktop" aria-label="Primary">
-          {navItems.map((item) => (
-            <NavLink key={item.to} to={item.to} className={({ isActive }) => (isActive ? 'header-link header-link-active' : 'header-link')}>
-              {item.label}
-            </NavLink>
+          {desktopLinks.map((item) => (
+            <NavLink key={item.to} to={item.to} className="header-link">{item.label}</NavLink>
           ))}
-
-          {!token && (
-            <>
-              <NavLink to="/login" className="header-action-link">Login</NavLink>
-              <NavLink to="/register" className="header-cta">Sign Up</NavLink>
-              <NavLink to="/partner/register" className="header-admin-link">Register Restaurant</NavLink>
-              <NavLink to="/partner/login" className="header-admin-link">Restaurant Login</NavLink>
-            </>
-          )}
-
-          {token ? <button type="button" className="header-logout-button" onClick={handleLogout}>Logout</button> : null}
+          {!token ? guestActions.map((item) => (
+            <NavLink key={item.to} to={item.to} className={item.className}>{item.label}</NavLink>
+          )) : <button type="button" className="header-logout-button" onClick={handleLogout}>Logout</button>}
         </nav>
-
         <button type="button" className="header-menu-toggle" onClick={() => setMobileOpen((prev) => !prev)}>
           <span /><span /><span />
         </button>
@@ -82,21 +82,14 @@ const Header = () => {
 
       <aside className={mobileOpen ? 'header-drawer header-drawer-open' : 'header-drawer'}>
         <nav className="header-drawer-nav" aria-label="Mobile primary">
-          {navItems.map((item) => (
-            <NavLink key={item.to} to={item.to} onClick={() => setMobileOpen(false)} className="header-drawer-link">
-              {item.label}
-            </NavLink>
+          {mobileLinks.map((item) => (
+            item.action ? (
+              <button key={item.label} type="button" className="header-drawer-button" onClick={item.action}>{item.label}</button>
+            ) : (
+              <NavLink key={item.to} to={item.to} onClick={() => setMobileOpen(false)} className="header-drawer-link">{item.label}</NavLink>
+            )
           ))}
         </nav>
-        {!token && (
-          <div className="header-drawer-auth">
-            <NavLink to="/login" className="header-drawer-login" onClick={() => setMobileOpen(false)}>Login</NavLink>
-            <NavLink to="/register" className="header-drawer-register" onClick={() => setMobileOpen(false)}>Sign Up</NavLink>
-            <NavLink to="/partner/register" className="header-drawer-admin" onClick={() => setMobileOpen(false)}>Register Restaurant</NavLink>
-            <NavLink to="/partner/login" className="header-drawer-admin" onClick={() => setMobileOpen(false)}>Restaurant Login</NavLink>
-          </div>
-        )}
-        {token ? <button type="button" className="header-drawer-logout" onClick={handleLogout}>Logout</button> : null}
       </aside>
     </header>
   );

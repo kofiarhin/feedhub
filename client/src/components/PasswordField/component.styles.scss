@@ -1,0 +1,14 @@
+.password-field {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+}
+
+.password-field button {
+  background: var(--surface-elevated);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.6rem;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+}

@@ -8,11 +8,11 @@ import RestaurantsPage from './pages/RestaurantsPage/RestaurantsPage';
 import RestaurantPage from './pages/RestaurantPage/RestaurantPage';
 import CartPage from './pages/CartPage/CartPage';
 import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
-import LoginPage from './pages/LoginPage/LoginPage';
-import RegisterPage from './pages/RegisterPage/RegisterPage';
+import AuthPage from './pages/AuthPage/AuthPage';
 import OrderHistoryPage from './pages/OrderHistoryPage/OrderHistoryPage';
-import AdminLoginPage from './pages/AdminLoginPage/AdminLoginPage';
-import PartnerRegisterPage from './pages/PartnerRegisterPage/PartnerRegisterPage';
+import PartnerLandingPage from './pages/PartnerLandingPage/PartnerLandingPage';
+import PartnerAuthPage from './pages/PartnerAuthPage/PartnerAuthPage';
+import PartnerOnboardingPage from './pages/PartnerOnboardingPage/PartnerOnboardingPage';
 import GuestOrderConfirmationPage from './pages/GuestOrderConfirmationPage/GuestOrderConfirmationPage';
 import AdminDashboardPage from './pages/AdminDashboardPage/AdminDashboardPage';
 import AdminOrdersPage from './pages/AdminOrdersPage/AdminOrdersPage';
@@ -34,10 +34,14 @@ const App = () => (
       <Route path="/cart" element={<CartPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/checkout/guest-confirmation" element={<GuestOrderConfirmationPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/partner/login" element={<AdminLoginPage />} />
-      <Route path="/partner/register" element={<PartnerRegisterPage />} />
+      <Route path="/auth" element={<AuthPage />} />
+      <Route path="/partner" element={<PartnerLandingPage />} />
+      <Route path="/partner/auth" element={<PartnerAuthPage />} />
+      <Route path="/partner/onboarding" element={<PartnerOnboardingPage />} />
+      <Route path="/login" element={<Navigate to="/auth?mode=login" replace />} />
+      <Route path="/register" element={<Navigate to="/auth?mode=register" replace />} />
+      <Route path="/partner/login" element={<Navigate to="/partner/auth" replace />} />
+      <Route path="/partner/register" element={<Navigate to="/partner/onboarding" replace />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/help" element={<HelpPage />} />
@@ -47,7 +51,7 @@ const App = () => (
         <Route path="/orders" element={<OrderHistoryPage />} />
       </Route>
     </Route>
-    <Route path="/admin/login" element={<Navigate to="/partner/login" replace />} />
+    <Route path="/admin/login" element={<Navigate to="/partner/auth" replace />} />
     <Route element={<AdminRoute />}>
       <Route element={<AdminLayout />}>
         <Route path="/admin" element={<AdminDashboardPage />} />
@@ -57,7 +61,6 @@ const App = () => (
       </Route>
     </Route>
     <Route path="*" element={<NotFoundPage />} />
-    <Route path="/404" element={<Navigate to="*" />} />
   </Routes>
 );
 

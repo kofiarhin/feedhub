@@ -1,0 +1,14 @@
+.partner-benefits {
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.partner-benefits li {
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.75rem;
+  padding: 0.8rem;
+  color: var(--text-secondary);
+}

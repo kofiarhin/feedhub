@@ -1,0 +1,32 @@
+.onboarding-stepper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+.onboarding-step {
+  background: var(--surface-muted);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+}
+
+.onboarding-step span {
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.onboarding-step p {
+  font-size: 0.82rem;
+  margin-top: 0.2rem;
+}
+
+.onboarding-step-active {
+  border-color: var(--brand-accent);
+}
+
+.onboarding-step-complete {
+  border-color: var(--success);
+}

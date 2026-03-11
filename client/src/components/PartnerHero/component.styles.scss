@@ -1,0 +1,39 @@
+.partner-hero {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.partner-hero-eyebrow {
+  color: var(--brand-accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.partner-hero-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.partner-hero-primary,
+.partner-hero-secondary {
+  text-decoration: none;
+  border-radius: 0.7rem;
+  padding: 0.65rem 0.9rem;
+  font-weight: 700;
+}
+
+.partner-hero-primary {
+  background: var(--brand-accent);
+  color: #1f1309;
+}
+
+.partner-hero-secondary {
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+}

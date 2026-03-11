@@ -1,2 +1,12 @@
-.footer { margin-top: 2rem; padding: 2rem 1rem; border-top: 1px solid #e5e7eb; color: #6b7280; }
-.footer-links { display: flex; gap: 1rem; margin-bottom: 0.5rem; }
+.footer {
+  margin-top: 2rem;
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+}
+
+.footer-links {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}

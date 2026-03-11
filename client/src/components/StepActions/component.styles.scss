@@ -1,0 +1,31 @@
+.step-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.step-actions-secondary,
+.step-actions-primary {
+  border-radius: 0.7rem;
+  padding: 0.65rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.step-actions-secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.step-actions-primary {
+  background: var(--brand-accent);
+  color: #1f1309;
+  border: 1px solid transparent;
+}
+
+.step-actions-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
